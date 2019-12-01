@@ -15,7 +15,7 @@ export class UserService {
     if (this.auth.checkTokenExpiration()) {
       this.auth.getNewToken();
     }
-    return this.http.get<{ users: User[], message: string }>('/api/getUsers');
+    return this.http.get<{ users: User[], message: string }>('https://incidents-server.herokuapp.com/api/getUsers');
   }
 
   addUser(newUser: { username: string; password: string; birthday: string; position: string; areas: Array<string> }):
@@ -23,6 +23,6 @@ export class UserService {
     if (this.auth.checkTokenExpiration()) {
       this.auth.getNewToken();
     }
-    return this.http.post<{ users: User[], message: string }>('/api/addUser', { newUser });
+    return this.http.post<{ users: User[], message: string }>('https://incidents-server.herokuapp.com/api/addUser', { newUser });
   }
 }

@@ -15,21 +15,21 @@ export class IncidentService {
     if (this.auth.checkTokenExpiration()) {
       this.auth.getNewToken();
     }
-    return this.http.get<{ incidents: Incident[] }>('/api/getIncidents');
+    return this.http.get<{ incidents: Incident[] }>('https://incidents-server.herokuapp.com/api/getIncidents');
   }
 
   addIncident(incident: Incident): Observable<{ incidents: Incident[] }> {
     if (this.auth.checkTokenExpiration()) {
       this.auth.getNewToken();
     }
-    return this.http.post<{ incidents: Incident[] }>('/api/addIncident', { incident });
+    return this.http.post<{ incidents: Incident[] }>('https://incidents-server.herokuapp.com/api/addIncident', { incident });
   }
 
   editIncident(id: number, description: string, assignee: string, status: string): Observable<{incident: Incident }> {
     if (this.auth.checkTokenExpiration()) {
       this.auth.getNewToken();
     }
-    return this.http.patch<{ incident: Incident }>('/api/editIncident', { id, description, assignee, status });
+    return this.http.patch<{ incident: Incident }>('https://incidents-server.herokuapp.com/api/editIncident', { id, description, assignee, status });
   }
 
   formatDate(date) {

@@ -23,7 +23,7 @@ export class AuthService {
     const username = localStorage.getItem('username');
 
     this.http.post<{ token: string, username: string, error: string
-    }>('/api/refreshToken', { username })
+    }>('https://incidents-server.herokuapp.com/api/refreshToken', { username })
       .pipe(first())
       .subscribe(
         result => {
