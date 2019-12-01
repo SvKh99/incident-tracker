@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {InjectionToken, NgModule} from '@angular/core';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import {ActionReducerMap, StoreModule} from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -27,6 +27,8 @@ import { IncidentsComponent } from './components/incidents/incidents.component';
 import { IncidentDetailsComponent } from './components/incident-details/incident-details.component';
 
 import { ModalComponent } from './modal/_components';
+import {AppState, initialAppState} from "./store/state/app.state";
+export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
 
 export function getToken() {
   return localStorage.getItem('access_token');
@@ -47,7 +49,7 @@ export function getToken() {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(REDUCER_TOKEN, { initialState: initialAppState }),
     EffectsModule.forRoot([UserEffects, IncidentEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'root' }),
     JwtModule.forRoot({
@@ -62,7 +64,11 @@ export function getToken() {
     AuthService,
     AuthGuard,
     UserService,
-    IncidentService
+    IncidentService,
+    {
+      provide: REDUCER_TOKEN,
+      useValue: appReducers
+    },
   ],
   bootstrap: [AppComponent]
 })
