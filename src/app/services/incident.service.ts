@@ -29,7 +29,8 @@ export class IncidentService {
     if (this.auth.checkTokenExpiration()) {
       this.auth.getNewToken();
     }
-    return this.http.patch<{ incident: Incident }>('https://incidents-server.herokuapp.com/api/editIncident', { id, description, assignee, status });
+    return this.http.post<{ incident: Incident }>('https://incidents-server.herokuapp.com/api/editIncident',
+      { id, description, assignee, status });
   }
 
   formatDate(date) {
