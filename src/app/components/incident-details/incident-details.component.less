@@ -1,0 +1,135 @@
+@shadow-gray-color: rgb(124, 132, 145);
+@items-white-color: white;
+@text-color: rgb(64, 68, 77);
+@background-color: rgba(241, 244, 255, 0.64);
+@disabled-color: rgba(169, 172, 182, 0.64);
+
+
+.content {
+  min-height: 70vh;
+  padding: 20px;
+  margin-bottom: 25px;
+
+  background-color: @items-white-color;
+
+  border-radius: 10px;
+  border: 1.5px solid @shadow-gray-color;
+
+  .incident-details {
+    width: 95%;
+    margin: 20px auto;
+
+    .header {
+      h3 {
+        width: 70%;
+        text-align: left;
+      }
+
+      img {
+        float: right;
+      }
+    }
+
+    .description {
+      margin: 20px auto;
+
+      textarea {
+        min-height: 110px;
+        width: 100%;
+
+        text-align: justify;
+
+        border: none;
+
+        outline: none;
+        resize: none;
+
+        font-size: 13pt;
+      }
+    }
+
+    .area-details, .time-details, .footer {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: left;
+
+      div {
+        display: inline-block;
+        width: 200px;
+
+        margin: 5px 0;
+
+        u {
+          margin: 0 10px;
+        }
+      }
+
+      .priority {
+        padding: 5px 0;
+
+        border:  2px solid;
+        border-radius: 10px;
+
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .space {
+        width: 50px;
+      }
+    }
+
+    .edit-incident {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: left;
+
+      margin: 25px auto;
+
+      .assignee-group, .status-group {
+        margin: 10px 20px 10px 0;
+
+        label {
+          margin-right: 10px;
+        }
+
+        select {
+          padding: 5px 7px;
+          margin: 10px 0;
+
+          background-color: @background-color;
+
+          border: 1.5px solid @shadow-gray-color;
+          border-radius: 5px;
+        }
+      }
+
+      .save-button {
+        margin: auto;
+        text-align: center;
+
+        button {
+          padding: 7px 20px;
+
+          color: @text-color;
+          background-color: @background-color;
+
+          border: 1.5px solid @shadow-gray-color;
+          border-radius: 5px;
+        }
+
+        button:hover {
+          background-color: @shadow-gray-color;
+          color: @items-white-color;
+        }
+
+        button:disabled {
+          color: @disabled-color;
+          background-color: @items-white-color;
+
+          border: 1.5px solid @disabled-color;
+        }
+      }
+    }
+  }
+}

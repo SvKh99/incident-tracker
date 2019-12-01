@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://incidents-server.herokuapp.com/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

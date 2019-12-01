@@ -1,0 +1,45 @@
+<div class="content">
+  <div *ngIf="incident !== undefined" class="incident-details">
+    <div class="header">
+      <img src="../../../assets/images/{{ selectedStatus.replace(' ', '-') }}.png"
+           alt="{{ selectedStatus }}" width="25" />
+      <h3>{{ incident.name }}</h3>
+    </div>
+    <div class="area-details">
+      <div><b>Area:</b><u>{{ incident.area }}</u></div>
+    </div>
+    <div class="time-details">
+      <div><b>Start:</b><u>{{ incidentService.formatDate(incident.startDate) }}</u></div>
+      <div class="space"></div>
+      <div><b>Due:</b><u>{{ incidentService.formatDate(incident.dueDate) }}</u></div>
+    </div>
+    <div class="description">
+      <textarea id="description" name="description" [(ngModel)]="description">{{ incident.description }}</textarea>
+    </div>
+    <div class="footer">
+      <div *ngIf="selectedWorker.username !== undefined && checkAssignee()"><b>Assignee:</b><u>{{ selectedWorker.username }}</u></div>
+      <div *ngIf="selectedWorker.username !== undefined && checkAssignee()" class="space"></div>
+      <div class="priority" [style.border-color]="calculateColor(incident.priority)"
+           [style.color]="calculateColor(incident.priority)">{{ incident.priority }}</div>
+    </div>
+    <div class="edit-incident">
+      <div *ngIf="incident.assignee === undefined" class="assignee-group">
+        <label for="assignee">Set assignee: </label>
+        <select id="assignee" class="half-select" name="selectedWorker" [(ngModel)]="selectedWorker">
+          <option disabled selected hidden value="undefined">Select Worker</option>
+          <option *ngFor="let worker of users | async" [ngValue]="worker">{{ worker.username }}</option>
+        </select>
+      </div>
+      <div class="status-group" *ngIf="incident.status !== 'Checked'">
+        <label for="status">Change Incident's Status:</label>
+        <select id="status" name="selectedStatus" [(ngModel)]="selectedStatus">
+          <option disabled selected hidden value="{{ incident.status }}">{{ incident.status }}</option>
+          <option *ngFor="let st of status[incident.status.replace(' ', '')]" [ngValue]="st">{{ st }}</option>
+        </select>
+      </div>
+      <div class="save-button" *ngIf="incident.status !== 'Checked' || !incident.assignee">
+        <button [disabled]="!checkAssignee()" (click)="editIncident()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

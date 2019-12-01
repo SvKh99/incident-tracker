@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans|Staatliches&display=swap.css');
+
+@background-color: rgba(241, 244, 255, 0.64);
+@text-color: rgb(64, 63, 81);
+
+body {
+  margin: 0;
+  background: @background-color;
+
+  font-family: 'Lato', sans-serif;
+  color: @text-color;
+
+  a {
+    text-decoration: none;
+    color: @text-color;
+  }
+
+  button {
+    cursor: pointer;
+    color: @text-color;
+  }
+
+  input {
+    color: @text-color;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+  }
+}
