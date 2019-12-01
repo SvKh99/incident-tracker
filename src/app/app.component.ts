@@ -12,7 +12,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router, private store: Store<AppState>) { }
+  constructor(public auth: AuthService, private router: Router, private store: Store<AppState>) { }
 
   title = 'Incident Tracker';
   public menuShowed = false;
