@@ -15,7 +15,7 @@ export class AuthService {
 
   public login(username: string, password: string): Observable<{ token: string, username: string, error: string }> {
     return this.http.post<{ token: string, username: string, error: string
-    }>('/api/auth', { username, password });
+    }>('https://incidents-server.herokuapp.com/api/auth', { username, password });
   }
 
   public getNewToken() {
